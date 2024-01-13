@@ -2,6 +2,7 @@ import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'node:path'
 import AutoImport from 'unplugin-auto-import/vite';
+import createSvgIcon from './config/plugin/svg-icon';
 export default defineConfig({
   resolve: {
     alias: {
@@ -32,6 +33,7 @@ export default defineConfig({
   assetsInclude: ['**/*.gif'],
   plugins: [
     vue(),
+    createSvgIcon(true),
     AutoImport({
       // 自动导入vue相关函数，如: ref、reactive、toRef等
       imports: ['vue', 'vue-router'],

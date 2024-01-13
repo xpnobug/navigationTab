@@ -11,7 +11,7 @@
 
   // 是否是图片类型文件
   const isImage = computed(() => {
-    // return imageTypeList.includes(props.data.extension.toLowerCase());
+    return imageTypeList.includes(props.data.extension.toLowerCase());
   });
 
   // 获取文件图标，如果是图片这显示图片

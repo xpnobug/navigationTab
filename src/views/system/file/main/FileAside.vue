@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import '@arco-design/web-vue/dist/arco.css';
 import {fileTypeList, type fileTypeListItem} from '@/constant/file';
-
+import { Icon } from '@arco-design/web-vue';
+const IconFont = Icon.addFromIconFontCn({ src: '//at.alicdn.com/t/c/font_1898478_7sjj2m5hmkp.js' });
 const route = useRoute();
 const router = useRouter();
 
@@ -45,10 +46,8 @@ const onClickItem = (item: fileTypeListItem) => {
               @click="onClickItem(item)"
           >
             <template #icon>
-              <arco-icon
-                  :icon-class="item.menuIcon"
-                  style="height: 28px; width: 28px"
-              ></arco-icon>
+              <icon-font :type="item.icon"
+                       style="height: 28px; width: 28px"></icon-font>
             </template>
             <span>{{ item.name }}</span>
           </arco-menu-item>

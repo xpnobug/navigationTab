@@ -19,7 +19,7 @@
 
   // 文件名称带后缀
   const getFileName = (item: FileItem) => {
-    // return `${item.name}${item.extension ? `.${item.extension}` : ''}`;
+    return `${item.name}${item.extension ? `.${item.extension}` : ''}`;
     return `''`;
   };
 
