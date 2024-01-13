@@ -1,11 +1,11 @@
-import { defineConfig } from 'vite'
+import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'node:path'
-
+import AutoImport from 'unplugin-auto-import/vite';
 export default defineConfig({
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
+      '@': path.resolve(__dirname, './src'),
     }
   },
   server: {
@@ -32,7 +32,15 @@ export default defineConfig({
   assetsInclude: ['**/*.gif'],
   plugins: [
     vue(),
+    AutoImport({
+      // 自动导入vue相关函数，如: ref、reactive、toRef等
+      imports: ['vue', 'vue-router'],
+      dts: 'src/auto-import.d.ts',
+      eslintrc: {
+        // 改为 true 用于生成 eslint 配置（生成后改回 false，避免重复生成消耗）
+        enabled: false,
+      },
+    }),
   ],
   publicDir: 'public',
- 
 })

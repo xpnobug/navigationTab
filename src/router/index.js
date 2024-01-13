@@ -47,10 +47,10 @@ export default createRouter({
           ],
         },
         {
-          path: '/version',
-          name: 'version',
-          meta: { title: '单个菜单', icon: 'icon-wenjian' },
-          component: () => import('../views/dashboard/index.vue'),
+          name: 'File',
+          path: '/system/file',
+          component: () => import('@/views/system/file/index.vue'),
+          meta: { title: '文件管理', icon: 'icon-gongju' },
         },
       ]
     },
