@@ -10,7 +10,7 @@ export default createRouter({
     {
       path: '/',
       name: 'index',
-      // meta: { title: 'Home', icon: 'icon-tuijian', flat: true },
+      redirect: '/site/mysite', //重定向到 /site/mysite
       component: HomeView,
       children: [
         {
