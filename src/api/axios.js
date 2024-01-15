@@ -6,7 +6,7 @@ import { message } from 'ant-design-vue';
 // 创建一个Axios实例
 const instance = axios.create({
   baseURL: "/api", // 根据实际情况设置基础URL
-  timeout: 60000, // 请求超时时间
+  timeout: 90000, // 请求超时时间
   headers: {
     'Content-Type': 'application/json', // 设置请求头
   },

@@ -31,7 +31,7 @@
     const res = await update({ name: form.name }, props.fileInfo.id);
     // eslint-disable-next-line vue/no-mutating-props
     props.fileInfo.name = form.name;
-    proxy.$message.success(res.msg);
+    proxy.$message.success("修改成功！！！");
     return true;
   };
 </script>
