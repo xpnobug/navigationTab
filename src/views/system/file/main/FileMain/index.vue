@@ -130,7 +130,7 @@ const handleRightMenuClick = (mode: string, fileInfo: FileItem) => {
       hideCancel: false,
       onOk: () => {
         del(fileInfo.id).then((res) => {
-          proxy.$message.success(res.msg);
+          proxy.$message.success("删除成功！！！");
           getList();
         });
       },
@@ -160,7 +160,7 @@ const handleMulDelete = () => {
     hideCancel: false,
     onOk: () => {
       del(fileStore.selectedFileIds).then((res) => {
-        proxy.$message.success(res.msg);
+        proxy.$message.success("删除成功！！！");
         getList();
       });
     },
@@ -184,7 +184,6 @@ const handleUpload = (options: RequestOption) => {
     } = options;
     onProgress(20);
     console.log('fileItem:', fileItem);
-    console.log('name:', name);
     const formData = new FormData();
     formData.append(name as string, fileItem.file as Blob);
     console.log(formData)
@@ -192,7 +191,7 @@ const handleUpload = (options: RequestOption) => {
         .then((res) => {
           onSuccess(res);
           getList();
-          proxy.$message.success(res.statusText);
+          proxy.$message.success("上传成功！");
         })
         .catch((error) => {
           onError(error);

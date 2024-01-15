@@ -2,7 +2,8 @@
   import { fileExtendNameIconMap, imageTypeList } from '@/constant/file';
   import type { FileItem } from '@/api/system/file';
   import SvgIcon from '@/components/svg-icon/index.vue';
-
+  import { Icon } from '@arco-design/web-vue';
+  const IconFont = Icon.addFromIconFontCn({ src: '//at.alicdn.com/t/c/font_1898478_pmwl83cddk.js' });
   interface Props {
     data: FileItem;
   }
@@ -17,7 +18,6 @@
   // 获取文件图标，如果是图片这显示图片
   const getFileImg = computed<string>(() => {
     if (imageTypeList.includes(props.data.extension.toLowerCase())) {
-      console.log(props.data.url)
       return props.data.url || '';
     }
     if (
@@ -33,7 +33,8 @@
 
 <template>
   <img v-if="isImage" class="img" :src="props.data.url || ''" alt="" />
-  <SvgIcon v-else :icon-class="getFileImg" style="height: 100%; width: 100%" />
+<!--  <SvgIcon v-else :icon-class="getFileImg" style="height: 100%; width: 100%" />-->
+  <IconFont v-else :type="getFileImg" style="height: 100%; width: 100%" />
 </template>
 
 <style lang="less" scoped>

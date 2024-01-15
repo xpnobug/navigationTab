@@ -23,21 +23,21 @@ export interface FileExtendNameIconMap {
 
 // 文件类型图标 Map 映射
 export const fileExtendNameIconMap: FileExtendNameIconMap = {
-  mp3: 'file-music',
-  mp4: 'file-video',
+  mp3: 'icon-wenjianleixing-yinpin',
+  mp4: 'icon-shipin',
   dir: 'file-dir',
-  ppt: 'file-ppt',
+  ppt: 'icon-ppt',
   doc: 'file-wps',
-  docx: 'file-wps',
+  docx: 'icon-wendang-docx_doc',
   xls: 'file-excel',
-  xlsx: 'file-excel',
-  txt: 'file-txt',
+  xlsx: 'icon-xlsx',
+  txt: 'icon-wendang',
   rar: 'file-rar',
-  zip: 'file-zip',
-  html: 'file-html',
+  zip: 'icon-zip',
+  html: 'icon-html',
   css: 'file-css',
   js: 'file-js',
-  other: 'file-other', // 未知文件
+  other: 'icon-qita', // 未知文件
 };
 
 // 图片类型
