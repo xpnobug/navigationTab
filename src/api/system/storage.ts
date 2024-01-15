@@ -1,7 +1,6 @@
-import axios from 'axios';
+import axios from '../axios'; // 根据实际文件路径修改
 
-
-const BASE_URL = '/system/storage';
+const BASE_URL = '/navBucket/storage';
 
 export interface DataRecord {
   id?: number;
@@ -34,6 +33,7 @@ export interface ListParam {
 }
 
 export interface PageRes<T> {
+  records: { id?: number | undefined; name?: string | undefined; code?: string | undefined; type?: number | undefined; accessKey?: string | undefined; secretKey?: string | undefined; endpoint?: string | undefined; bucketName?: string | undefined; domain?: string | undefined; description?: string | undefined; isDefault?: boolean | undefined; sort?: number | undefined; status?: number | undefined; createUser?: string | undefined; createTime?: string | undefined; updateUser?: string | undefined; updateTime?: string | undefined; createUserString?: string | undefined; updateUserString?: string | undefined; }[];
   total: number;
   list: T;
 }

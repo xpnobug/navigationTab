@@ -17,6 +17,7 @@
   // 获取文件图标，如果是图片这显示图片
   const getFileImg = computed<string>(() => {
     if (imageTypeList.includes(props.data.extension.toLowerCase())) {
+      console.log(props.data.url)
       return props.data.url || '';
     }
     if (

@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from '../axios';
 
-const BASE_URL = '/system/file';
+const BASE_URL = '/file';
 
 export interface FileItem {
   id: string;
@@ -21,7 +21,7 @@ export interface FileItem {
 export interface ListParam {
   name?: string;
   type?: string;
-  sort?: Array<string>;
+  sort?: string;
 }
 
 export function list(params: ListParam) {

@@ -37,7 +37,7 @@
 </script>
 
 <template>
-  <arco-modal
+  <a-modal
     v-model:visible="visible"
     title="重命名"
     width="90%"
@@ -46,23 +46,23 @@
     @close="cancel"
     @before-ok="save"
   >
-    <arco-row justify="center" align="center">
-      <arco-form
+    <a-row justify="center" align="center">
+      <a-form
         ref="FormRef"
         :model="form"
         auto-label-width
         :style="{ width: '80%' }"
       >
-        <arco-form-item
+        <a-form-item
           field="name"
           label="文件名称"
           :rules="[{ required: true, message: '请输入文件名称' }]"
         >
-          <arco-input v-model="form.name" placeholder="请输入文件名称" allow-clear />
-        </arco-form-item>
-      </arco-form>
-    </arco-row>
-  </arco-modal>
+          <a-input v-model="form.name" placeholder="请输入文件名称" allow-clear />
+        </a-form-item>
+      </a-form>
+    </a-row>
+  </a-modal>
 </template>
 
 <style lang="less" scoped>

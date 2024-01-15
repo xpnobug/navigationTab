@@ -1,9 +1,9 @@
 <script setup lang="ts">
-  // import { FileItem } from '@/api/system/file';
+  import { FileItem } from '@/api/system/file';
   import FileImg from '../../main/FileMain/FileImg.vue';
 
   interface Props {
-    // fileInfo: FileItem;
+    fileInfo: FileItem;
     onClose: () => void;
   }
   const props = withDefaults(defineProps<Props>(), {});
@@ -11,7 +11,7 @@
   const title = ref();
 
   onMounted(() => {
-    // title.value = `${props.fileInfo.name}.${props.fileInfo.extension}`;
+    title.value = `${props.fileInfo.name}.${props.fileInfo.extension}`;
     visible.value = true;
   });
 
@@ -34,7 +34,7 @@
 </script>
 
 <template>
-  <arco-modal
+  <a-modal
     v-model:visible="visible"
     :title="title"
     title-align="start"
@@ -44,25 +44,25 @@
     :modal-style="{ maxWidth: '300px' }"
     @close="cancel"
   >
-    <arco-row justify="center" align="center">
+    <a-row justify="center" align="center">
       <div style="height: 100px">
         <FileImg :data="fileInfo" style="border-radius: 5px"></FileImg>
       </div>
-    </arco-row>
-    <arco-row style="margin-top: 15px">
-      <arco-descriptions :column="1" title="详细信息" layout="inline-vertical">
-        <arco-descriptions-item :label="title">{{
+    </a-row>
+    <a-row style="margin-top: 15px">
+      <a-descriptions :column="1" title="详细信息" layout="inline-vertical">
+        <a-descriptions-item :label="title">{{
           formatFileSize(fileInfo.size)
-        }}</arco-descriptions-item>
-        <arco-descriptions-item label="创建时间">{{
+        }}</a-descriptions-item>
+        <a-descriptions-item label="创建时间">{{
           fileInfo.createTime
-        }}</arco-descriptions-item>
-        <arco-descriptions-item label="修改时间">{{
+        }}</a-descriptions-item>
+        <a-descriptions-item label="修改时间">{{
           fileInfo.updateTime
-        }}</arco-descriptions-item>
-      </arco-descriptions>
-    </arco-row>
-  </arco-modal>
+        }}</a-descriptions-item>
+      </a-descriptions>
+    </a-row>
+  </a-modal>
 </template>
 
 <style lang="less" scoped>

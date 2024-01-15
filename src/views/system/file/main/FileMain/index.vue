@@ -5,7 +5,7 @@ import {api as viewerApi} from 'v-viewer';
 import {imageTypeList} from '@/constant/file';
 import {useFileStore} from '@/stores/modules/file';
 import type {FileItem, ListParam} from '@/api/system/file';
-import {del} from '@/api/system/file';
+import { list, del } from '@/api/system/file';
 import type {DataRecord as StorageDataRecord} from '@/api/system/storage';
 import {
   add as addStorage,
@@ -47,7 +47,7 @@ const data = reactive({
   queryParams: {
     name: undefined,
     type: route.query.type?.toString() || undefined,
-    sort: ['updateTime,desc'],
+    // sort: ['updateTime,desc'],
   },
   storageQueryParams: {
     page: 1,
@@ -73,21 +73,9 @@ const getList = async (params: ListParam = {...queryParams.value}) => {
     loading.value = true;
     isBatchMode.value = false;
     params.type = params.type === '0' ? undefined : params.type;
-    // const res = await list(params);
-    const res = [{
-      "id": "1744386913534578689",
-      "createUserString": "超级管理员",
-      "createTime": "2024-01-08 23:53:44",
-      "updateUserString": "超级管理员",
-      "updateTime": "2024-01-08 23:53:44",
-      "name": "IMG_20181004_172415",
-      "size": 139992,
-      "url": "http://8.140.45.252:9000/travel/IMG_20231119_125507.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=mhAqhRJrIuFFfc8Glh3F%2F20240113%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240113T145747Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=17e351a1b5fced5209664c46220459604d79151c1f2bd1e7879d2680c25459ba",
-      "extension": "jpg",
-      "type": 2,
-      "storageId": 2
-    }];
-    fileList.value = res;
+    const res = await list(params);
+    fileList.value = res.data.data.records;
+    console.log(res.data.data.records)
   } finally {
     loading.value = false;
   }
@@ -195,13 +183,16 @@ const handleUpload = (options: RequestOption) => {
       name = 'file',
     } = options;
     onProgress(20);
+    console.log('fileItem:', fileItem);
+    console.log('name:', name);
     const formData = new FormData();
     formData.append(name as string, fileItem.file as Blob);
-    upload(formData)
+    console.log(formData)
+    upload(fileItem)
         .then((res) => {
           onSuccess(res);
           getList();
-          proxy.$message.success(res.msg);
+          proxy.$message.success(res.statusText);
         })
         .catch((error) => {
           onError(error);
@@ -235,13 +226,14 @@ const resetQuery = () => {
  * @param params 参数
  */
 const getStorageList = async (
-    params: ListParam = {...storageQueryParams.value},
+    // params: ListParam = {...storageQueryParams.value},
 ) => {
   try {
     storageLoading.value = true;
-    const res = await listStorage(params);
-    storageList.value = res.data.list;
-    totalStorage.value = res.data.total;
+    const res = await listStorage(null);
+    console.log("list",res.data.data)
+    storageList.value = res.data.data.records;
+    totalStorage.value = res.data.data.total;
   } finally {
     storageLoading.value = false;
   }
@@ -591,7 +583,11 @@ const handleStorageExport = () => {
               <arco-tag v-if="record.isDefault" color="arcoblue">默认</arco-tag>
             </template>
           </arco-table-column>
-          <arco-table-column title="编码" datarco-index="code"/>
+          <arco-table-column title="编码" datarco-index="code">
+            <template #cell="{ record }">
+              {{ record.code }}
+            </template>
+          </arco-table-column>
           <arco-table-column title="类型" align="center">
             <template #cell="{ record }">
               <!--              <dict-tag :value="record.type" :dict="storage_type_enum" />-->
@@ -614,8 +610,16 @@ const handleStorageExport = () => {
               datarco-index="bucketName"
               ellipsis
               tooltip
-          />
-          <arco-table-column title="域名" datarco-index="domain" ellipsis tooltip/>
+          >
+            <template #cell="{ record }">
+              {{ record.bucketName }}
+            </template>
+          </arco-table-column>
+          <arco-table-column title="域名" datarco-index="domain" ellipsis tooltip>
+            <template #cell="{ record }">
+              {{ record.domain }}
+            </template>
+          </arco-table-column>
           <arco-table-column title="状态" align="center">
             <template #cell="{ record }">
               <arco-switch

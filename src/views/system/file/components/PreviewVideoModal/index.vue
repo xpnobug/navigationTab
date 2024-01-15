@@ -35,7 +35,7 @@
 </script>
 
 <template>
-  <arco-modal
+  <a-modal
     v-model:visible="visible"
     :title="title"
     width="auto"
@@ -44,5 +44,5 @@
     @close="close"
   >
     <div id="videoId"></div>
-  </arco-modal>
+  </a-modal>
 </template>
