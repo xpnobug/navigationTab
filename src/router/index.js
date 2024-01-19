@@ -52,9 +52,14 @@ export default createRouter({
           component: () => import('@/views/system/file/index.vue'),
           meta: { title: '文件管理', icon: 'icon-gongju' },
         },
+        {
+          name: 'newChat',
+          path: '/system/newChat',
+          component: () => import('@/views/chat/new/index.vue'),
+          meta: { title: '聊天系统', icon: 'icon-gongju' },
+        },
       ]
     },
 
   ]
 })
-
