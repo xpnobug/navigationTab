@@ -35,7 +35,7 @@
     </template>
     <template #content>
       <p>
-        你好！！！
+        我不好
       </p>
     </template>
     <template #datetime>
@@ -68,4 +68,15 @@ const dislike = () => {
   action.value = 'disliked';
 };
 </script>
-
+<style scoped>
+::v-deep .ant-comment-inner {
+  display: flex !important;
+  flex-direction: row-reverse;
+}
+::v-deep .ant-comment-content{
+  flex: 0 0 auto;
+}
+::v-deep .ant-comment-content-author{
+  justify-content: flex-end;
+}
+</style>

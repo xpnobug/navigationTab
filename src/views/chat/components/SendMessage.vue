@@ -3,7 +3,7 @@
 </template>
 <script lang="ts" setup>
 import { ref, watch } from 'vue';
-const value = ref<string>('@afc163');
+const value = ref<string>('');
 watch(value, () => {
   console.log('value', value);
 });

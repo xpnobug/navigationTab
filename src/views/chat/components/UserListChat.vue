@@ -5,19 +5,19 @@
       item-layout="horizontal"
       :data-source="list"
   >
-    <template #loadMore>
-      <div
-          v-if="!initLoading && !loading"
-          :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }"
-      >
-        <a-button @click="onLoadMore"></a-button>
-      </div>
-    </template>
+<!--    <template #loadMore>-->
+<!--      <div-->
+<!--          v-if="!initLoading && !loading"-->
+<!--          :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }"-->
+<!--      >-->
+<!--        <a-button @click="onLoadMore"></a-button>-->
+<!--      </div>-->
+<!--    </template>-->
     <template #renderItem="{ item }">
       <a-list-item>
         <a-skeleton avatar :title="false" :loading="!!item.loading" active>
           <a-list-item-meta
-              description="描述"
+              description="内容"
           >
             <template #title>
               <a href="https://www.antdv.com/">{{ item.name.last }}</a>
