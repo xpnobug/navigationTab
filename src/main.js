@@ -10,6 +10,8 @@ import ArcoVue from '@arco-design/web-vue';
 import ArcoVueIcon from '@arco-design/web-vue/es/icon';
 import '@arco-design/web-vue/dist/arco.css';
 
+import '@/utils/websocket'
+
 const app = createApp(App);
 
 // 使用Pinia

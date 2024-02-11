@@ -4,6 +4,7 @@ import path from 'node:path'
 import AutoImport from 'unplugin-auto-import/vite';
 import createSvgIcon from './config/plugin/svg-icon';
 export default defineConfig({
+  mode: 'development', // vite开发模式
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -12,7 +13,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://182.92.201.19:8080/',
+        target: 'http://182.92.201.19:8080',
         // target: 'http://127.0.0.1:8080',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),

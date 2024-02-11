@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue'
 import Index01 from '../views/dashboard/index.vue'
-// import index01 from '../views/dashboard/index.vue'
+// import index01 from '../views/dashboard/RendIndex.vue'
 const hasGithubPages = import.meta.env.BASE_URL;
 
 export default createRouter({
@@ -42,7 +42,7 @@ export default createRouter({
             //   name: 'dynamic-match',
             //   // 路由 path 默认参数再 meta.params 里
             //   meta: { title: '动态参数页面', params: { id: 1 } },
-            //   component: () => import('../views/dashboard/index.vue'),
+            //   component: () => import('../views/dashboard/RendIndex.vue'),
             // },
           ],
         },

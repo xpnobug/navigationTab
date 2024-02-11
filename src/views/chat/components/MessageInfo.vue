@@ -1,5 +1,5 @@
 <template>
-  <a-comment>
+  <a-comment v-for="i in chatMessageList">
 <!--    <template #actions>-->
 <!--      <span key="comment-basic-like">-->
 <!--        <a-tooltip title="Like">-->
@@ -35,12 +35,13 @@
     </template>
     <template #content>
       <p>
-        你好！！！
+        {{ i.message.body.content }}
       </p>
     </template>
+
     <template #datetime>
       <a-tooltip :title="dayjs().format('YYYY-MM-DD HH:mm:ss')">
-        <span>{{ dayjs().fromNow() }}</span>
+        <span>{{ i.message.sendTime }}</span>
       </a-tooltip>
     </template>
   </a-comment>
@@ -48,8 +49,11 @@
 <script lang="ts" setup>
 import dayjs from 'dayjs';
 import { LikeFilled, LikeOutlined, DislikeFilled, DislikeOutlined } from '@ant-design/icons-vue';
-import { ref } from 'vue';
+import {computed, ref} from 'vue';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import {useChatStore} from "@/stores/chat";
+import {useUserStore} from "@/stores/user";
+import VirtualList from "@/components/VirtualList";
 dayjs.extend(relativeTime);
 
 const likes = ref<number>(0);
@@ -67,5 +71,14 @@ const dislike = () => {
   dislikes.value = 1;
   action.value = 'disliked';
 };
+
+const chatStore = useChatStore()
+const userStore = useUserStore()
+const userInfo = computed(() => userStore.userInfo)
+const chatMessageList = computed(() => chatStore.chatMessageList)
+console.log(chatMessageList.value)
+
+
+
 </script>
 

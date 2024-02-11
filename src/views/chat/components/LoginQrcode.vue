@@ -7,9 +7,14 @@
       </template>
       <!--      二维码  status="loading" -->
       <a-space>
-        <a-qrcode value="http://www.antdv.com"/>
+        <a-qrcode v-if="loginQrCode"  :value="loginQrCode" icon="https://npm.onmicrosoft.cn/hexo-tool-cc@1.1.7/source/svg/wx2.svg"/>
       </a-space>
-
+      <p class="login-desc" v-if="loginStatus === LoginStatus.Waiting">
+        扫码成功~，点击“登录”继续登录
+      </p>
+      <p class="login-desc" v-if="loginStatus === LoginStatus.Init">
+        使用「<strong class="login-desc-bold">微信</strong>」扫描二维码登录~~
+      </p>
       <template #modalRender="{ originVNode }">
         <div :style="transformStyle">
           <component :is="originVNode" />
@@ -21,11 +26,44 @@
 <script lang="ts" setup>
 import { ref, computed, CSSProperties, watch, watchEffect } from 'vue';
 import { useDraggable } from '@vueuse/core';
+import { useWsLoginStore, LoginStatus } from '@/stores/ws'
+const loginStore = useWsLoginStore()
 const open = ref<boolean>(false);
 const modalTitleRef = ref<HTMLElement>(null);
+
+const visible = computed({
+  get() {
+    return loginStore.showLogin
+  },
+  set(value) {
+    loginStore.showLogin = value
+  },
+})
+const loginQrCode = computed(() => loginStore.loginQrCode)
+const loginStatus = computed(() => loginStore.loginStatus)
+
+const qrLoading = ref();
+if (loginStore.loginStatus == LoginStatus.Waiting){
+  console.log("扫码成功",loginStatus)
+  qrLoading.value = "scanned";
+}
 const showModal = () => {
   open.value = true;
+  // 获取登录二维码
+  loginStore.getLoginQrCode()
 };
+
+
+
+// watchEffect(() => {
+//   console.log("打开窗口了 而且 二维码没获取，而且非登录就去获取二维码",visible.value)
+//   // 打开窗口了 而且 二维码没获取，而且非登录就去获取二维码
+//   if (visible.value && !loginQrCode.value) {
+//     console.log("打开窗口了 而且 二维码没获取，而且非登录就去获取二维码",loginQrCode.value)
+//     // 获取登录二维码
+//     loginStore.getLoginQrCode()
+//   }
+// })
 const { x, y, isDragging } = useDraggable(modalTitleRef);
 const handleOk = (e: MouseEvent) => {
   console.log(e);

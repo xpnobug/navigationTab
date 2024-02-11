@@ -20,7 +20,10 @@
     "v-viewer": "^3.0.10",
     "vue": "^3.3.11",
     "vue-router": "^4.2.5",
-    "xgplayer": "^2.31.6"
+    "xgplayer": "^2.31.6",
+    "alova": "^2.13.1",
+    "mitt": "^3.0.1",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@arco-design/web-vue": "^2.54.2",
