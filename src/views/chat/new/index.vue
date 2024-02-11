@@ -1,7 +1,7 @@
 <template>
   <a-space direction="vertical" :style="{ width: '100%' }" :size="[0, 48]">
     <a-layout>
-      <div style="background-color: #2e2e2e">
+      <div class="userInfo-isShow" style="background-color: #2e2e2e">
         <div style="display: flex; flex-direction: column; align-items: center; margin-top: 10px; width: 70px;">
           <div style="display: flex; flex-direction: column; align-items: center;" >
             <a-space wrap :size="16" style="margin-bottom: 10px">
@@ -17,27 +17,31 @@
         </div>
       </div>
 <!--      用户列表-->
-      <a-layout-sider>
-        <UserListChat/>
-      </a-layout-sider>
+      <div class="isShow">
+        <a-layout-sider>
+          <UserListChat/>
+        </a-layout-sider>
+      </div>
       <a-layout>
         <a-layout-header :style="headerStyle" class="header">聊天群</a-layout-header>
-        <a-layout-content :style="contentStyle" class="gdt">
-          <div v-if="chatMessageList?.length !== 0">
-<!--            <div style="text-align: center">-->
-<!--              <a-space :size="[0, 'small']" wrap style="top: 10px; margin: 10px">-->
-<!--                <a-tag :bordered="false">new Data</a-tag>-->
-<!--              </a-space>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--              <MessageInfo />-->
-<!--            </div>-->
-            <div>
-              <MessageInfoMe />
+        <div>
+          <a-layout-content :style="contentStyle" class="gdt">
+            <div v-if="chatMessageList?.length !== 0">
+              <!--            <div style="text-align: center">-->
+              <!--              <a-space :size="[0, 'small']" wrap style="top: 10px; margin: 10px">-->
+              <!--                <a-tag :bordered="false">new Data</a-tag>-->
+              <!--              </a-space>-->
+              <!--            </div>-->
+              <!--            <div>-->
+              <!--              <MessageInfo />-->
+              <!--            </div>-->
+              <div>
+                <MessageInfoMe />
+              </div>
             </div>
-          </div>
-          <EmptyInfo v-else></EmptyInfo>
-        </a-layout-content>
+            <EmptyInfo v-else></EmptyInfo>
+          </a-layout-content>
+        </div>
         <a-layout-footer :style="footerStyle" >
           <SendMessage v-if="userStore.isSign === true"/>
           <login-qrcode v-else/>
@@ -63,13 +67,13 @@ import {useChatStore} from "@/stores/chat";
 import type { MessageType, MsgType, CacheUserItem} from '@/services/types'
 const headerStyle: CSSProperties = {
   height: '72px',
-  paddingInline: '90px',
-  lineHeight: '64px',
+  // paddingInline: '90px',
+  lineHeight: '75px',
   backgroundColor: '245, 245, 245',
 };
 
 const contentStyle: CSSProperties = {
-  height: 0,
+  height: '440px',
   // lineHeight: '500px',
   padding: '0px 110px',
   overflowY: "scroll",
@@ -150,6 +154,17 @@ const enterIconLoading = () => {
 :deep(.ant-layout .ant-layout-sider){
   min-width: 300px !important;
   background-color: #e5e4e4;
-
 }
+@media (max-width: 768px) {
+  :deep(.ant-layout .ant-layout-content){
+    padding: 0 25px!important;
+  }
+  .userInfo-isShow{
+    display: none;
+  }
+  .isShow{
+    display: none;
+  }
+}
+
 </style>

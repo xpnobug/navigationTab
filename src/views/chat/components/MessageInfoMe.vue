@@ -95,4 +95,11 @@ const getKey = (item: CacheUserItem) => item.uid
 :deep(.ant-comment .ant-comment-avatar img){
   border-radius:8%
 }
+
+@media (max-width: 768px) {
+  :deep(.ant-comment-content-detail){
+    /*width: 260px;*/
+  }
+
+}
 </style>
