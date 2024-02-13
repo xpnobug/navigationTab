@@ -1,6 +1,12 @@
 <template>
   <div style="display: flex; flex-direction: column; align-items: flex-end;">
-    <a-mentions rows="3" v-model:value="inputMsg" autofocus  status="warning" :options="options" @select="onSelect" style="background-color: #f5f5f5; border: none;outline: none;"></a-mentions>
+<!--    background-color: #f5f5f5;-->
+    <a-mentions rows="4" v-model:value="inputMsg"
+                autofocus
+                status="none"
+                :options="options"
+                @select="onSelect"
+                style="border: none;outline: none;"></a-mentions>
     <a-button type="primary" style="margin-top: 10px;"
               :class="['action', { 'is-edit': inputMsg.length, 'disabled': !inputMsg.length }]"
               :tabindex="!isSign || isSending"

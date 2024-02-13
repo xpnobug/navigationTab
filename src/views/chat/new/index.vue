@@ -91,6 +91,7 @@ const footerStyle: CSSProperties = {
   borderTopStyle: "solid",
   borderTopColor: "#f1f1f1",
   backgroundColor: '245, 245, 245',
+  padding:'15px 20px'
 };
 const handleScroll = (direction: string, e: Event) => {
   console.log('direction:', direction);
