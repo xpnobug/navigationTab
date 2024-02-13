@@ -106,7 +106,7 @@ const getKey = (item: CacheUserItem) => item.uid
 @media (max-width: 768px) {
   .message-info{
     margin-right: 10px;
-    width: 260px!important;
+    width: 255px!important;
   }
   :deep(.ant-comment-content-detail) {
     /*width: 260px;*/
