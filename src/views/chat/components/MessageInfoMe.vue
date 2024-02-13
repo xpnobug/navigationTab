@@ -12,7 +12,7 @@
         <img :src="i.fromUser.avatar" :alt="i.fromUser.name" style="border-radius: 8%;"/>
       </template>
       <template #content>
-        <div style="margin-right: 10px;">
+        <div class="message-info">
           <div :class="{'message-bubble': true, 'green-bubble': isCurrentUser(i.fromUser.uid) }">
             {{i.message.body.content}}
           </div>
@@ -104,9 +104,17 @@ const getKey = (item: CacheUserItem) => item.uid
 }
 
 @media (max-width: 768px) {
+  .message-info{
+    margin-right: 10px;
+    width: 260px!important;
+  }
   :deep(.ant-comment-content-detail) {
     /*width: 260px;*/
   }
+}
+.message-info{
+  margin-right: 10px;
+  width: 750px;
 }
 .message-bubble {
   position: relative;
@@ -116,6 +124,7 @@ const getKey = (item: CacheUserItem) => item.uid
   padding: 10px;
 }
 .green-bubble {
+  text-align: left;
   background-color: #89d961;
 }
 </style>
