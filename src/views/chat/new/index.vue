@@ -44,7 +44,14 @@
         </div>
         <a-layout-footer :style="footerStyle" >
           <SendMessage v-if="userStore.isSign === true"/>
-          <login-qrcode v-else/>
+          <div style="text-align: center;margin: 10px" v-else>
+            <p>登录方式</p>
+            <div style="display: flex; justify-content: center;">
+              <login-qrcode/>
+              <QqLogin />
+            </div>
+          </div>
+
         </a-layout-footer>
       </a-layout>
     </a-layout>
@@ -65,6 +72,7 @@ import { useUserStore } from '@/stores/user'
 import EmptyInfo from "@/views/chat/components/EmptyInfo.vue";
 import {useChatStore} from "@/stores/chat";
 import type { MessageType, MsgType, CacheUserItem} from '@/services/types'
+import QqLogin from "@/views/chat/components/QqLogin.vue";
 const headerStyle: CSSProperties = {
   height: '72px',
   // paddingInline: '90px',

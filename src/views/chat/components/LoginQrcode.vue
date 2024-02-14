@@ -1,36 +1,53 @@
 <template>
-  <div style="text-align: center">
-    <a-button type="primary" @click="showModal">扫码登录</a-button>
-    <a-modal style="text-align: center" ref="modalRef" v-model:open="open" :wrap-style="{ overflow: 'hidden' }" @ok="handleOk" :closable="false" :footer="null">
-      <template #title>
-        <div ref="modalTitleRef" style="width: 100%; cursor: move">扫码登录</div>
-      </template>
-      <!--      二维码  status="loading" -->
-      <a-space>
-        <a-qrcode v-if="loginQrCode"  :value="loginQrCode" icon="https://npm.onmicrosoft.cn/hexo-tool-cc@1.1.7/source/svg/wx2.svg"/>
-      </a-space>
-      <p class="login-desc" v-if="loginStatus === LoginStatus.Waiting">
-        扫码成功~，点击“登录”继续登录
-      </p>
-      <p class="login-desc" v-if="loginStatus === LoginStatus.Init">
-        使用「<strong class="login-desc-bold">微信</strong>」扫描二维码登录~~
-      </p>
-      <template #modalRender="{ originVNode }">
-        <div :style="transformStyle">
-          <component :is="originVNode" />
-        </div>
-      </template>
-    </a-modal>
-  </div>
+
+  <a-space direction="vertical" style="margin: 0 10px;">
+    <a-space>
+      <a-popover>
+        <template #content>
+          <p>微信登录</p>
+        </template>
+        <a-button shape="circle" :size="size" @click="showModal">
+          <template #icon>
+            <icon-font type="icon-a-weixin2" style="height: 28px; width: 28px"></icon-font>
+          </template>
+        </a-button>
+      </a-popover>
+    </a-space>
+  </a-space>
+  <a-modal style="text-align: center" ref="modalRef" v-model:open="open" :wrap-style="{ overflow: 'hidden' }"
+           @ok="handleOk" :closable="false" :footer="null">
+    <template #title>
+      <div ref="modalTitleRef" style="width: 100%; cursor: move">扫码登录</div>
+    </template>
+    <!--      二维码  status="loading" -->
+    <a-space>
+      <a-qrcode v-if="loginQrCode" :value="loginQrCode"
+                icon="https://npm.onmicrosoft.cn/hexo-tool-cc@1.1.7/source/svg/wx2.svg"/>
+    </a-space>
+    <p class="login-desc" v-if="loginStatus === LoginStatus.Waiting">
+      扫码成功~，点击“登录”继续登录
+    </p>
+    <p class="login-desc" v-if="loginStatus === LoginStatus.Init">
+      使用「<strong class="login-desc-bold">微信</strong>」扫描二维码登录~~
+    </p>
+    <template #modalRender="{ originVNode }">
+      <div :style="transformStyle">
+        <component :is="originVNode"/>
+      </div>
+    </template>
+  </a-modal>
 </template>
 <script lang="ts" setup>
-import { ref, computed, CSSProperties, watch, watchEffect } from 'vue';
-import { useDraggable } from '@vueuse/core';
-import { useWsLoginStore, LoginStatus } from '@/stores/ws'
+import {computed, CSSProperties, ref, watch, watchEffect} from 'vue';
+import {useDraggable} from '@vueuse/core';
+import {LoginStatus, useWsLoginStore} from '@/stores/ws'
+import {Icon} from '@arco-design/web-vue';
+import {SizeType} from "ant-design-vue/es/config-provider";
+const IconFont = Icon.addFromIconFontCn({src: '//at.alicdn.com/t/c/font_1898478_hnsro7pv7cl.js'});
 const loginStore = useWsLoginStore()
 const open = ref<boolean>(false);
 const modalTitleRef = ref<HTMLElement>(null);
-
+const size = ref<SizeType>('large');
 const visible = computed({
   get() {
     return loginStore.showLogin
@@ -43,8 +60,8 @@ const loginQrCode = computed(() => loginStore.loginQrCode)
 const loginStatus = computed(() => loginStore.loginStatus)
 
 const qrLoading = ref();
-if (loginStore.loginStatus == LoginStatus.Waiting){
-  console.log("扫码成功",loginStatus)
+if (loginStore.loginStatus == LoginStatus.Waiting) {
+  console.log("扫码成功", loginStatus)
   qrLoading.value = "scanned";
 }
 const showModal = () => {
@@ -52,7 +69,6 @@ const showModal = () => {
   // 获取登录二维码
   loginStore.getLoginQrCode()
 };
-
 
 
 // watchEffect(() => {
@@ -64,7 +80,7 @@ const showModal = () => {
 //     loginStore.getLoginQrCode()
 //   }
 // })
-const { x, y, isDragging } = useDraggable(modalTitleRef);
+const {x, y, isDragging} = useDraggable(modalTitleRef);
 const handleOk = (e: MouseEvent) => {
   console.log(e);
   open.value = false;
@@ -76,7 +92,7 @@ const transformX = ref(0);
 const transformY = ref(0);
 const preTransformX = ref(0);
 const preTransformY = ref(0);
-const dragRect = ref({ left: 0, right: 0, top: 0, bottom: 0 });
+const dragRect = ref({left: 0, right: 0, top: 0, bottom: 0});
 watch([x, y], () => {
   if (!startedDrag.value) {
     startX.value = x.value;
