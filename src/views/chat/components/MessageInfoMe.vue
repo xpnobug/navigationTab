@@ -1,5 +1,4 @@
 <template>
-
   <div v-for="i in chatMessageList">
     <a-comment :class="[{ 'current-user': isCurrentUser(i.fromUser.uid) }]">
       <template #author><a>{{ i.fromUser.name }}</a></template>
@@ -14,10 +13,17 @@
       <template #content>
         <div class="message-info">
           <div :class="{'message-bubble': true, 'green-bubble': isCurrentUser(i.fromUser.uid) }">
-            {{i.message.body.content}}
+            {{ i.message.body.content }}
           </div>
         </div>
-<!--        <MessageContent :content="i.message.body.content" :uid="i.fromUser.uid"/>-->
+        <span
+            class="new-msgs-tips"
+            v-show="currentNewMsgCount?.count && currentNewMsgCount.count > 0"
+            @click="goToNewMessage"
+        >{{ currentNewMsgCount?.count }} 条新消息
+
+    </span>
+
       </template>
     </a-comment>
   </div>
@@ -30,8 +36,8 @@ import {useUserStore} from '@/stores/user'
 import {useChatStore} from '@/stores/chat'
 import {useCachedStore} from '@/stores/cached'
 import eventBus from '@/utils/eventBus'
+
 import type {CacheUserItem} from '@/services/types'
-import MessageContent from "@/views/chat/components/MessageContent.vue";
 
 dayjs.extend(relativeTime);
 
@@ -39,6 +45,10 @@ const likes = ref<number>(0);
 const dislikes = ref<number>(0);
 const action = ref<string>();
 
+const userInfo = computed(() => userStore.userInfo)
+const messageOptions = computed(() => chatStore.currentMessageOptions)
+const chatMessageList = computed(() => chatStore.chatMessageList)
+const currentNewMsgCount = computed(() => chatStore.currentNewMsgCount)
 const like = () => {
   likes.value = 1;
   dislikes.value = 0;
@@ -54,14 +64,11 @@ const chatStore = useChatStore()
 const userStore = useUserStore()
 
 
+
 // 多根元素的时候，不加这个透传属性会报 warning
 defineOptions({inheritAttrs: false})
 
 // 只能对一级 props 进行 toRefs 结构，否则会丢失响应
-
-const userInfo = computed(() => userStore.userInfo)
-const chatMessageList = computed(() => chatStore.chatMessageList)
-const currentNewMsgCount = computed(() => chatStore.currentNewMsgCount)
 
 const cachedStore = useCachedStore()
 
@@ -86,15 +93,19 @@ const getKey = (item: CacheUserItem) => item.uid
   display: flex !important;
   flex-direction: row-reverse;
 }
-:deep(.current-user .ant-comment-content-author){
+
+:deep(.current-user .ant-comment-content-author) {
   flex-direction: row-reverse;
 }
+
 :deep(.current-user .ant-comment-content) {
   text-align: right;
 }
+
 :deep(.ant-comment-content) {
   flex: 0 0 auto;
 }
+
 /*:deep(.ant-comment-content-author) {*/
 /*  justify-content: flex-end;*/
 /*}*/
@@ -104,18 +115,21 @@ const getKey = (item: CacheUserItem) => item.uid
 }
 
 @media (max-width: 768px) {
-  .message-info{
+  .message-info {
     margin-right: 10px;
-    width: 255px!important;
+    width: 255px !important;
   }
+
   :deep(.ant-comment-content-detail) {
     /*width: 260px;*/
   }
 }
-.message-info{
+
+.message-info {
   margin-right: 10px;
   width: 750px;
 }
+
 .message-bubble {
   position: relative;
   display: inline-block;
@@ -123,6 +137,7 @@ const getKey = (item: CacheUserItem) => item.uid
   border-radius: 10px;
   padding: 10px;
 }
+
 .green-bubble {
   text-align: left;
   background-color: #89d961;

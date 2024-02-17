@@ -56,6 +56,7 @@ const send = (msgType: MsgEnum, body: any) => {
         console.log("发送的信息",body)
         if (res.message.type === MsgEnum.TEXT) {
           chatStore.pushMsg(res) // 消息列表新增一条消息
+          chatStore.chatListToBottomAction?.() // 滚动到消息列表底部
         } else {
           // 更新上传状态下的消息
           chatStore.updateMsg(tempMessageId.value, res)

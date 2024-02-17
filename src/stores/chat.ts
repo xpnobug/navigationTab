@@ -277,7 +277,7 @@ export const useChatStore = defineStore('chat', () => {
     if (globalStore.currentSession && globalStore.currentSession.roomId !== msg.message.roomId) {
       let result = undefined
       // 如果当前路由不是聊天，就开始拿会话详情，并手动新增一条会话记录
-      // if (route?.path && route?.path !== '/') {
+      // if (route?.path && route?.path !== '/system/newChat') {
       //   globalStore.currentSession.roomId = msg.message.roomId
       //   globalStore.currentSession.type = RoomTypeEnum.Single
       if (!current) {
@@ -320,13 +320,13 @@ export const useChatStore = defineStore('chat', () => {
       // 如果新消息的 roomId 和 当前显示的 room 的 Id 一致，就更新已读
     } else {
       // 且当前路由在 聊天 内
-      if (route?.path && route?.path === '/') {
+      if (route?.path && route?.path === '/system/newChat') {
         apis.markMsgRead({ roomId: currentRoomId.value }).send()
       }
     }
 
     // 如果当前路由不是聊天，就开始计数
-    if (route?.path && route?.path !== '/') {
+    if (route?.path && route?.path !== '/system/newChat') {
       globalStore.unReadMark.newMsgUnreadCount++
     }
 
@@ -457,5 +457,6 @@ export const useChatStore = defineStore('chat', () => {
     isGroup,
     currentSessionInfo,
     getMessage,
+    getMsgList,
   }
 })
