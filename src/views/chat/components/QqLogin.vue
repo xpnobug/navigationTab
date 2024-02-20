@@ -26,7 +26,9 @@ const IconFont = Icon.addFromIconFontCn({src: '//at.alicdn.com/t/c/font_1898478_
 const size = ref<SizeType>('large');
 const loginHandle = async () => {
   const res = await loginByQQ();
-  console.log(res)
+  const redirectUrl = res.data.data;
+  // window.location.href = redirectUrl; // 跳转到获取的链接
+  window.open(redirectUrl, '_blank'); // 在新的页面中打开链接
 }
 
 </script>
