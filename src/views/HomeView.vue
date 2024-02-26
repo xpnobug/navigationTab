@@ -42,9 +42,10 @@
 <script lang="ts" setup>
 import {ref} from 'vue';
 import {RouterView, useRouter} from 'vue-router';
-import {clearMenuItem, getMenuData} from '@ant-design-vue/pro-layout';
+import {clearMenuItem} from '@ant-design-vue/pro-layout';
 import {createFromIconfontCN, MenuFoldOutlined, MenuUnfoldOutlined} from '@ant-design/icons-vue';
 import {message} from 'ant-design-vue';
+import getMenuData from "../router/menuUtil";
 
 const change = (affixed: boolean) => {
   console.log(affixed);
@@ -63,7 +64,9 @@ const onBreakpoint = (broken: boolean) => {
 };
 
 //获取菜单数据
-const {menuData} = getMenuData(clearMenuItem(router.getRoutes()));
+const {menuData} = getMenuData();
+
+console.log("",menuData)
 // 判断menuData是否成功获取
 if (menuData && menuData.length > 0) {
   message.success('菜单渲染成功');
