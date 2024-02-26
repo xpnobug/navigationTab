@@ -90,7 +90,7 @@ import { ref, onMounted } from 'vue';
 // 动态创建样式表链接元素
 const css = document.createElement('link');
 css.rel = 'stylesheet';
-css.href = '../src/assets/css/style.css'; // 根据实际路径调整
+css.href = 'src/assets/css/style.css'; // 根据实际路径调整
 document.head.appendChild(css);
 
 const linkElement = document.createElement('link');
@@ -99,7 +99,7 @@ linkElement.href = 'https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/norma
 document.head.appendChild(linkElement);
 
 const js = document.createElement('script');
-js.src = '../src/assets/js/script.js'; // Adjust the path accordingly
+js.src = 'src/assets/js/script.js'; // Adjust the path accordingly
 document.head.appendChild(js);
 
 // 创建 ref 来存储背景图片 URL
