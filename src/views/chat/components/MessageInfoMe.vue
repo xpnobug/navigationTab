@@ -10,6 +10,8 @@
       <template #datetime>
         <a-tooltip :title="dayjs().format(i.message.sendTime)">
           <span>{{ formatTimestamp(i.message.sendTime) }}</span>
+          <!-- 消息归属地 -->
+<!--          <span class="user-ip">({{ userInfo.locPlace || '未知' }})</span>-->
         </a-tooltip>
       </template>
       <template #avatar>
@@ -51,6 +53,7 @@ const dislikes = ref<number>(0);
 const action = ref<string>();
 
 const userInfo = computed(() => userStore.userInfo)
+console.log(userInfo)
 const messageOptions = computed(() => chatStore.currentMessageOptions)
 const chatMessageList = computed(() => chatStore.chatMessageList)
 const currentNewMsgCount = computed(() => chatStore.currentNewMsgCount)

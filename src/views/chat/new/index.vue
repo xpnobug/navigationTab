@@ -118,18 +118,19 @@ provide('virtualListRef', virtualListRef)
 // 数据加载成功后调用 scrollToBottom 方法
 const scrollContainer = ref();
 const msgVisibleEl = ref(null)
+
 onMounted(() => {
   // 获取需要检查滚动位置的元素，假设这个元素的id为 "scrollableElement"
   scrollContainer.value = document.getElementById("scrollableElement");
-  if (chatMessageList.value != null){
-    scrollContainer.value.scrollTop = 999999;
+  if (chatMessageList.value.length != 0){
+    console.log('chatMessageList.value',chatMessageList.value.length)
+    scrollContainer.value.scrollTop = calculateBottomPosition();
   }
   nextTick(() => {
     chatStore.chatListToBottomAction = () => {
       goToBottom()
     }
   })
-
 })
 // 到顶部时触发函数 记录旧的滚动高度，加载更多消息后滚动回加载时那条消息的位置
 const onToTop = async () => {
@@ -201,7 +202,6 @@ const calculateBottomPosition = () => {
 
 // 回到底部
 const goToBottom = async () => {
-
   if (virtualListRef.value) {
     // 获取滚动容器的最底部位置
     scrollContainer.value.scrollTop = calculateBottomPosition()
@@ -226,9 +226,9 @@ provide('virtualListRef', virtualListRef)
 const loginStore = useWsLoginStore() // 显示登录框
 // 获取用户详情
 chatStore.getSessionList(true)
-console.log(chatMessageList)
+// console.log(chatMessageList)
 if (!userStore.isSign) {
-  console.log("!userStore.isSign",!userStore.isSign)
+  // console.log("!userStore.isSign",!userStore.isSign)
   loginStore.showLogin = true
 }
 

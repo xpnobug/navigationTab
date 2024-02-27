@@ -169,11 +169,12 @@ class WS {
         // 获取用户详情
         chatStore.getSessionList(true)
         // 自定义表情列表
-        emojiStore.getEmojiList()
+        // emojiStore.getEmojiList()
         break
       }
       // 收到消息
       case WsResponseMessageType.ReceiveMessage: {
+        console.log("收到消息", params.data as MessageType)
         chatStore.pushMsg(params.data as MessageType)
         break
       }
@@ -260,5 +261,4 @@ class WS {
     }
   }
 }
-
 export default new WS()

@@ -5,11 +5,11 @@ export enum WsResponseMessageType {
   /** 1.登录返回二维码 */
   LoginQrCode = 1,
   /** 2.用户扫描成功等待授权 */
-  WaitingAuthorize = 2,
+  WaitingAuthorize ,
   /** 3.用户登录成功返回用户信息 */
   LoginSuccess,
   /** 4.收到消息 */
-  ReceiveMessage,
+  ReceiveMessage ,
   /** 5.上下线推送 */
   OnOffLine,
   /** 6.前端token失效 */

@@ -109,6 +109,8 @@ export const useChatStore = defineStore('chat', () => {
   const currentNewMsgCount = computed({
     get: () => {
       const current = newMsgCount.get(currentRoomId.value as number)
+      console.log("current",current)
+
       if (current === undefined) {
         newMsgCount.set(currentRoomId.value, { count: 0, isStart: false })
       }
@@ -146,6 +148,11 @@ export const useChatStore = defineStore('chat', () => {
   // 当前消息回复
   const currentMsgReply = ref<Partial<MessageType>>({})
 
+  // 每两秒执行一次 getMsgList()
+  setInterval(() => {
+    getMsgList();
+  }, 5000);
+
   // 将消息列表转换为数组
   const chatMessageList = computed(() => [...(currentMessageMap.value?.values() || [])])
   const getMsgList = async (size = pageSize) => {
@@ -154,7 +161,7 @@ export const useChatStore = defineStore('chat', () => {
       .getMsgList({
         params: {
           pageSize: size,
-          cursor: currentMessageOptions.value?.cursor,
+          cursor: '',
           roomId: currentRoomId.value,
         },
       })
@@ -232,7 +239,7 @@ export const useChatStore = defineStore('chat', () => {
       // 初始化所有用户基本信息
       userStore.isSign && cachedStore.initAllUserBaseInfo()
       // 联系人列表
-      contactStore.getContactList(true)
+      // contactStore.getContactList(true)
     }
   }
 
@@ -353,6 +360,7 @@ export const useChatStore = defineStore('chat', () => {
     if (currentMessageOptions.value?.isLast || currentMessageOptions.value?.isLoading) return
     await getMsgList(size)
   }
+
 
   const clearNewMsgCount = () => {
     currentNewMsgCount.value && (currentNewMsgCount.value.count = 0)

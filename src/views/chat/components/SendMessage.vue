@@ -23,8 +23,8 @@ import { useGlobalStore } from '@/stores/global'
 import { useChatStore } from '@/stores/chat'
 import { useUserStore } from '@/stores/user'
 import type { IMention } from '../types'
-import renderReplyContent from '@/utils/renderReplyContent'
-import { useUserInfo } from '@/hooks/useCached'
+import { message } from 'ant-design-vue';
+
 const value = ref<string>('');
 const inputMsg = ref('')
 const isSending = ref(false)
@@ -77,10 +77,9 @@ const send = (msgType: MsgEnum, body: any) => {
 
 
 const sendMsgHandler = () => {
-  console.log("ininin")
   // 空消息或正在发送时禁止发送
   if (!inputMsg.value?.trim().length || isSending.value) {
-    console.log("空消息或正在发送时禁止发送")
+    message.warn("空消息或正在发送时禁止发送")
     return
   }
 
