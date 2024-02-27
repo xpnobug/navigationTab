@@ -91,7 +91,6 @@ class WS {
         // 清空缓存的消息
         this.#tasks = []
       } else {
-        console.log("如果没登录，而且已经请求了登录二维码，就要更新登录二维码。")
         // 如果没登录，而且已经请求了登录二维码，就要更新登录二维码。
         loginStore.loginQrCode && loginStore.getLoginQrCode()
       }

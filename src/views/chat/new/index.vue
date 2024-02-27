@@ -169,7 +169,7 @@ const onScroll = throttle(() => {
   // chatStore.getMsgList(20)
   // 获取元素的滚动位置
   const scrollPosition = scrollContainer.value.scrollTop;
-  console.log(scrollPosition)
+  // console.log(scrollPosition)
   // 获取元素的滚动容器高度
   const containerHeight = scrollContainer.value.clientHeight;
   // 获取元素的滚动内容高度

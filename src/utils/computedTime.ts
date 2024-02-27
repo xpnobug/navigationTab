@@ -26,9 +26,18 @@ const timeToStr = (time: number) => {
 
 // 超过5分钟，或者超过20条消息，就添加展示时间
 const checkTimeInterval = (cur: MessageType, pre: MessageType) => {
+
+// 将时间字符串转换为 Date 对象
+  const curMessageSendTime = new Date(cur.message.sendTime);
+  const preMessageSendTime = new Date(pre.message.sendTime);
+
+// 获取时间戳
+  const curMessageSendTimestamp = curMessageSendTime.getTime();
+  const preMessageSendTimestamp = preMessageSendTime.getTime();
+
   // 如果有一个超过 5 分钟了或者计数达到 20 条了
   if (
-    (pre && cur.message.sendTime - pre.message.sendTime > intervalTime) ||
+    (pre && curMessageSendTimestamp - preMessageSendTimestamp > intervalTime) ||
     computedCount >= computedCountMax
   ) {
     // 重置计数

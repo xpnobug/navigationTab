@@ -1,10 +1,15 @@
 <template>
   <div v-for="i in chatMessageList">
+    <div style="text-align: center" v-if="i.timeBlock">
+      <a-space :size="[0, 'small']" wrap style="top: 10px; margin: 10px">
+        <a-tag :bordered="false">{{ i.timeBlock }}</a-tag>
+      </a-space>
+    </div>
     <a-comment :class="[{ 'current-user': isCurrentUser(i.fromUser.uid) }]">
       <template #author><a>{{ i.fromUser.name }}</a></template>
       <template #datetime>
-        <a-tooltip :title="dayjs().format('YYYY-MM-DD HH:mm:ss')">
-          <span>{{ i.message.sendTime }}</span>
+        <a-tooltip :title="dayjs().format(i.message.sendTime)">
+          <span>{{ formatTimestamp(i.message.sendTime) }}</span>
         </a-tooltip>
       </template>
       <template #avatar>
@@ -36,7 +41,7 @@ import {useUserStore} from '@/stores/user'
 import {useChatStore} from '@/stores/chat'
 import {useCachedStore} from '@/stores/cached'
 import eventBus from '@/utils/eventBus'
-
+import { formatTimestamp } from '@/utils/computedTime'
 import type {CacheUserItem} from '@/services/types'
 
 dayjs.extend(relativeTime);
