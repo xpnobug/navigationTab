@@ -125,7 +125,7 @@ const getKey = (item: CacheUserItem) => item.uid
 @media (max-width: 768px) {
   .message-info {
     margin-right: 10px;
-    width: 255px !important;
+    width: 230px !important;
   }
 
   :deep(.ant-comment-content-detail) {
@@ -136,6 +136,7 @@ const getKey = (item: CacheUserItem) => item.uid
 .message-info {
   margin-right: 10px;
   width: 750px;
+  word-break: break-all;/*允许单词内换行即可实现自动换行*/
 }
 
 .message-bubble {
