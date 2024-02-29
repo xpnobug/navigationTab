@@ -148,10 +148,10 @@ export const useChatStore = defineStore('chat', () => {
   // 当前消息回复
   const currentMsgReply = ref<Partial<MessageType>>({})
 
-  // 每两秒执行一次 getMsgList()
-  // setInterval(() => {
-  //   getMsgList();
-  // }, 5000);
+  // 每两秒执行一次 getMsgList() 暂时使用
+  setInterval(() => {
+    getMsgList();
+  }, 3000);
 
   // 将消息列表转换为数组
   const chatMessageList = computed(() => [...(currentMessageMap.value?.values() || [])])
