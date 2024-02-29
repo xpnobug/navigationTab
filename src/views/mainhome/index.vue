@@ -1,6 +1,7 @@
 <template>
 
-  <div class="container" id="container">
+
+  <div class="container" id="container" style="display: none">
     <div class="column" style="--column: 0">
       <a href="/#/admin" target="_blank"><div class="hexagon" style="--index: 1; --icon: '🚀';"></div></a>
       <div class="hexagon" style="--index: 2; --icon: '🎸';"></div>
@@ -108,7 +109,7 @@ const backgroundUrl = ref('');
 // 当组件挂载后执行的操作
 onMounted(() => {
   // 设置背景图片的 URL
-  const newBackgroundUrl = 'https://assets.codepen.io/907471/vision-pro-palm.jpg';
+  const newBackgroundUrl = 'https://api.xingzhige.com/API/Bing_img/';
   // 更新背景图片 URL 的 ref 值
   backgroundUrl.value = newBackgroundUrl;
 

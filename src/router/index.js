@@ -1,6 +1,7 @@
 import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router';
 import HomeView from '../views/HomeView.vue'
 import MainHome from '../views/mainhome/index.vue'
+import NewChat from '../views/newchat/index.vue'
 
 const hasGithubPages = import.meta.env.BASE_URL;
 
@@ -11,6 +12,11 @@ export default createRouter({
       path: '/',
       name: 'index',
       component: () => import('../views/mainhome/index.vue')
+    },
+    {
+      path: '/newchat',
+      name: 'newchat',
+      component: () => import('../views/newchat/index.vue')
     },
     {
       path: '/admin',
