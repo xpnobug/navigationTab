@@ -1,7 +1,7 @@
 import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router';
 import HomeView from '../views/HomeView.vue'
 import MainHome from '../views/mainhome/index.vue'
-import NewChat from '../views/newchat/index.vue'
+import NewChat from '../views/newchat/demo1/index.vue'
 
 const hasGithubPages = import.meta.env.BASE_URL;
 
@@ -16,7 +16,12 @@ export default createRouter({
     {
       path: '/newchat',
       name: 'newchat',
-      component: () => import('../views/newchat/index.vue')
+      component: () => import('../views/newchat/demo1/index.vue')
+    },
+    {
+      path: '/demo2',
+      name: 'demo2',
+      component: () => import('../views/newchat/demo2/index.vue')
     },
     {
       path: '/admin',
@@ -66,7 +71,7 @@ export default createRouter({
         {
           name: 'newChat',
           path: '/system/newChat',
-          component: () => import('@/views/chat/new/index.vue'),
+          component: () => import('@/views/newchat/demo2/index.vue'),
           meta: {title: '聊天系统', icon: 'icon-gongju'},
         },
       ]
