@@ -2,6 +2,8 @@ import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'node:path'
 import AutoImport from 'unplugin-auto-import/vite';
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import Components from "unplugin-vue-components/vite";
 import createSvgIcon from './config/plugin/svg-icon';
 export default defineConfig({
   mode: 'development', // vite开发模式
@@ -21,6 +23,7 @@ export default defineConfig({
     },
     port: 5174
   },
+  //配置打包文件分类输出
   build: {
     outDir: 'dist',
     rollupOptions: {
@@ -38,11 +41,15 @@ export default defineConfig({
     AutoImport({
       // 自动导入vue相关函数，如: ref、reactive、toRef等
       imports: ['vue', 'vue-router'],
+      resolvers: [ElementPlusResolver()],
       dts: 'src/auto-import.d.ts',
       eslintrc: {
         // 改为 true 用于生成 eslint 配置（生成后改回 false，避免重复生成消耗）
         enabled: false,
       },
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
     }),
   ],
   publicDir: 'public',

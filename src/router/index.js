@@ -2,7 +2,7 @@ import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router';
 import HomeView from '../views/HomeView.vue'
 import MainHome from '../views/mainhome/index.vue'
 import NewChat from '../views/newchat/demo1/index.vue'
-
+import Admin from '../views/admin/admin.vue'
 const hasGithubPages = import.meta.env.BASE_URL;
 
 export default createRouter({
@@ -24,10 +24,25 @@ export default createRouter({
       component: () => import('../views/newchat/demo2/index.vue')
     },
     {
+      path: '/mai',
+      name: 'mai',
+      component: () => import('../views/mai/index.vue')
+    },
+    {
+      path: '/maidemo1',
+      name: 'maidemo1',
+      component: () => import('../views/mai/demo2/views/virtual-waterfall-container.vue')
+    },
+    {
+      path: '/admindemo',
+      name: 'admindemo',
+      component: () => import('../views/admin/admin.vue')
+    },
+    {
       path: '/admin',
       name: 'admin',
       redirect: '/site/mysite', //重定向到 /site/mysite
-      component: HomeView,
+      component: Admin,
       children: [
         {
           path: '/site',
