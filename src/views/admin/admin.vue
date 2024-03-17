@@ -29,7 +29,7 @@ const handleMenuItemClick = (item) => {
   console.log(routeName, item.params)
 };
 const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_1898478_az5nroxqmv4.js',
+  scriptUrl: '//at.alicdn.com/t/c/font_1898478_qk3tcjfa6nc.js',
 });
 
 onMounted(() => {
@@ -74,6 +74,8 @@ const contentStyles = computed(() => ({
   marginLeft: collapsed.value ? '-150px' : '35px', // 根据collapsed的值动态调整marginLeft
   transition: 'all 0.3s ease'
 }));
+
+const selectedKeys = ref<string[]>(['1']);
 </script>
 
 <template>
@@ -90,20 +92,22 @@ const contentStyles = computed(() => ({
               <span class="software">导航栏</span>
             </div>
           </div>
-          <i class="iconfont icon-xiangyoujiantou toggle" @click="toggleSidebar"></i>
+          <icon-font class="iconfont toggle" type="icon-guanbi"  @click="toggleSidebar"/>
+<!--          <i class="iconfont icon-guanbi toggle" @click="toggleSidebar"></i>-->
         </header>
         <div class="menu-bar">
           <div class="menu">
             <li class="search-box">
-              <i class="iconfont icon-sousuo icon"></i>
+<!--              <i class="iconfont icon-sousuo icon"></i>-->
+              <icon-font class="iconfont icon" type="icon-sousuo"/>
               <input type="text" placeholder="搜索...">
             </li>
-            <ul class="menu-links">
+            <ul class="menu-links" >
               <li class="nav-link" v-for="item in menuData">
                 <RouterLink :to="item.path">
                   <icon-font class="icon" :type="item.meta.icon"/>
                   <!--                v-if="!item.children"-->
-                  <span class="text nac-text" :key="item.path" @click="handleMenuItemClick(item)">{{item.meta.title}}</span>
+                  <span class="text nac-text" @click="handleMenuItemClick(item)">{{item.meta.title}}</span>
                 </RouterLink>
               </li>
             </ul>
@@ -111,7 +115,7 @@ const contentStyles = computed(() => ({
           <div class="bottom-content">
             <li class="">
               <a href="#">
-                <i class="iconfont icon-zhuxiaoyuan icon"></i>
+                <icon-font class="iconfont icon" type="icon-zhuxiao"/>
                 <span class="text nac-text">注销</span>
               </a>
             </li>
@@ -129,9 +133,9 @@ const contentStyles = computed(() => ({
         </div>
       </nav>
     </div>
-    <div style="width: 100%;" :style="contentStyles">
+    <div style="width: 100%; display: flex; align-items: stretch; " :style="contentStyles">
       <a-layout>
-        <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff' }">
+        <a-layout-content :style="{ padding: '24px', background: '#fff'}">
           <div>
             <RouterView/>
           </div>

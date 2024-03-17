@@ -1,8 +1,5 @@
 import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router';
-import HomeView from '../views/HomeView.vue'
-import MainHome from '../views/mainhome/index.vue'
-import NewChat from '../views/newchat/demo1/index.vue'
-import Admin from '../views/admin/admin.vue'
+import Admin from '../views/admin/demo01.vue'
 const hasGithubPages = import.meta.env.BASE_URL;
 
 export default createRouter({
@@ -11,7 +8,7 @@ export default createRouter({
     {
       path: '/',
       name: 'index',
-      component: () => import('../views/mainhome/index.vue')
+      component: () => import('../views/admin/demo01.vue')
     },
     {
       path: '/newchat',
@@ -22,11 +19,6 @@ export default createRouter({
       path: '/demo2',
       name: 'demo2',
       component: () => import('../views/newchat/demo2/index.vue')
-    },
-    {
-      path: '/mai',
-      name: 'mai',
-      component: () => import('../views/mai/index.vue')
     },
     {
       path: '/maidemo1',
@@ -54,7 +46,7 @@ export default createRouter({
               path: 'mysite',
               name: 'mysite',
               meta: {title: '我的', icon: 'icon-wode',},
-              component: () => import('../views/siterouter/SiteLinkView.vue'),
+              component: () => import('../views/siterouter/BlogIndex.vue'),
             },
             {
               path: 'blog',
@@ -77,18 +69,61 @@ export default createRouter({
             // },
           ],
         },
+
         {
           name: 'File',
           path: '/system/file',
-          component: () => import('@/views/system/file/index.vue'),
-          meta: {title: '文件管理', icon: 'icon-gongju'},
+          meta: {title: '文件管理'},
+          children: [
+            {
+              name: 'File',
+              path: '/system/file',
+              meta: {title: '文件管理', icon: 'icon-gongju'},
+              component: () => import('@/views/system/file/index.vue'),
+            },
+          ],
         },
         {
           name: 'newChat',
           path: '/system/newChat',
-          component: () => import('@/views/newchat/demo2/index.vue'),
-          meta: {title: '聊天系统', icon: 'icon-gongju'},
+          meta: {title: '聊天系统', icon: 'icon-liaotian-zaixian'},
+          children: [
+            {
+              name: 'newChat',
+              path: '/system/newChat',
+              component: () => import('@/views/newchat/demo2/index.vue'),
+              meta: {title: '聊天系统', icon: 'icon-liaotian-zaixian'},
+            },
+          ],
         },
+        {
+          path: '/mai',
+          name: 'mai',
+          // component: () => import('../views/mai/demo/demo3.vue'),
+          meta: {title: '套图管理', icon: 'icon-taotu'},
+          children: [
+            {
+              path: '/mai',
+              name: 'mai',
+              component: () => import('../views/mai/demo/demo2.vue'),
+              meta: {title: '套图管理', icon: 'icon-taotu'},
+            },
+          ],
+        },
+        // {
+        //   path: '/mai',
+        //   name: 'mai',
+        //   // component: () => import('../views/mai/demo/demo3.vue'),
+        //   meta: {title: '音乐管理', icon: 'icon-taotu'},
+        //   children: [
+        //     {
+        //       path: '/mai',
+        //       name: 'mai',
+        //       component: () => import('../views/mai/demo/demo2.vue'),
+        //       meta: {title: '音乐管理', icon: 'icon-taotu'},
+        //     },
+        //   ],
+        // },
       ]
 
     }

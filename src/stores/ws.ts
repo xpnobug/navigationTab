@@ -15,7 +15,7 @@ export const useWsLoginStore = defineStore('wsLogin', () => {
   const showLogin = ref(false)
   const loginStatus = ref(LoginStatus.Init)
   function getLoginQrCode() {
-    console.log("请求登录二维码")
+    // console.log("请求登录二维码")
     wsIns.send({ type: WsRequestMsgType.RequestLoginQrCode })
   }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="app-main">
-    <div class="chat-list-name" style="margin-bottom: 10px; border-bottom: 1px solid var(--border-light);">聊天讨论组</div>
+    <div class="chat-list-name" style="margin-bottom: 10px; border-bottom: 1px solid var(--border-light);">讨论组</div>
     <div class="chat-wrapper" @scroll="onScroll" id="scrollableElement" ref="virtualListRef">
       <div v-if="chatMessageList?.length !== 0" v-for="i in chatMessageList">
         <div style="text-align: center" v-if="i.timeBlock">

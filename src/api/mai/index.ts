@@ -8,7 +8,12 @@ export interface ListParam {
     pageNum?: number;
     pageSize?: number;
 }
-
+export interface ImgParam {
+    type?: number;
+    picType?: number;
+    pageNum?: number;
+    delay?: number;
+}
 export interface PageRes<T> {
     records: { id?: number | undefined; name?: string | undefined; code?: string | undefined; type?: number | undefined; accessKey?: string | undefined; secretKey?: string | undefined; endpoint?: string | undefined; bucketName?: string | undefined; domain?: string | undefined; description?: string | undefined; isDefault?: boolean | undefined; sort?: number | undefined; status?: number | undefined; createUser?: string | undefined; createTime?: string | undefined; updateUser?: string | undefined; updateTime?: string | undefined; createUserString?: string | undefined; updateUserString?: string | undefined; }[];
     total: number;
@@ -22,6 +27,18 @@ export function getMaiInfo(maiPage: ListParam) {
 
 export function getImgList(params: ListParam) {
     return axios.get<PageRes<ListParam[]>>(`/imgMai/getImgList`, {
+        params,
+    });
+}
+
+export function autoAdd(params: ImgParam) {
+    return axios.get(`${BASE_URL}/autoAdd`, {
+        params,
+    });
+}
+
+export function stop(params: ImgParam) {
+    return axios.get(`${BASE_URL}/stop`, {
         params,
     });
 }

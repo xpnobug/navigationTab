@@ -52,7 +52,7 @@ const handleCollapseChange = (keys) => {
 };
 
 watch(activeKey, val => {
-    console.log(val);
+    // console.log(val);
 });
 </script>
   

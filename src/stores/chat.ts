@@ -109,7 +109,7 @@ export const useChatStore = defineStore('chat', () => {
   const currentNewMsgCount = computed({
     get: () => {
       const current = newMsgCount.get(currentRoomId.value as number)
-      console.log("current",current)
+      // console.log("current",current)
 
       if (current === undefined) {
         newMsgCount.set(currentRoomId.value, { count: 0, isStart: false })
@@ -149,9 +149,9 @@ export const useChatStore = defineStore('chat', () => {
   const currentMsgReply = ref<Partial<MessageType>>({})
 
   // 每两秒执行一次 getMsgList() 暂时使用
-  setInterval(() => {
-    getMsgList();
-  }, 3000);
+  // setInterval(() => {
+  //   getMsgList();
+  // }, 3000);
 
   // 将消息列表转换为数组
   const chatMessageList = computed(() => [...(currentMessageMap.value?.values() || [])])

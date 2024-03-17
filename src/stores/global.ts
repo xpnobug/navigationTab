@@ -45,7 +45,7 @@ export const useGlobalStore = defineStore('global', () => {
     // 标记房间最新消息已读
     apis.markMsgRead({ roomId: val.roomId }).send()
     const unreadCount = chatStore.markSessionRead(val.roomId)
-    console.log(unReadMark.newMsgUnreadCount, unreadCount)
+    // console.log(unReadMark.newMsgUnreadCount, unreadCount)
     // setTimeout(() => {
     //   if (unReadMark.newMsgUnreadCount !== unReadMark.newMsgUnreadCount - unreadCount) {
     //     // unReadMark.newMsgUnreadCount = unReadMark.newMsgUnreadCount - unreadCount

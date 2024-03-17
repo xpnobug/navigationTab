@@ -1,6 +1,6 @@
 // 本地配置到 .env 里面修改。生产配置在 .env.production 里面
 const prefix = import.meta.env.PROD ? import.meta.env.VITE_API_PREFIX : '' +"/api"
-console.log(prefix)
+// console.log(prefix)
 export default {
   getUserInfoDetail: `${prefix}/capi/user/userInfo`, // 获取用户信息详情
   getMemberStatistic: `${prefix}/capi/chat/public/member/statistic`,

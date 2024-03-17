@@ -38,7 +38,7 @@ const num = ref(1)
 // 加载更多图片数据的函数
 const loadMoreImages = async () => {
   num.value += 1;
-  console.log(num.value)
+  // console.log(num.value)
   loading.value = true;
   setTimeout(async () => {
     try {
@@ -65,7 +65,7 @@ const scrollContainer = ref();
 const onScrolls = throttle(() => {
   // 获取元素的滚动位置
   const scrollPosition = scrollContainer.value.scrollTop;
-  console.log(scrollPosition)
+  // console.log(scrollPosition)
   // 获取元素的滚动容器高度
   const containerHeight = scrollContainer.value.clientHeight;
   // 获取元素的滚动内容高度
@@ -73,7 +73,7 @@ const onScrolls = throttle(() => {
   // 计算滚动位置与滚动容器高度的差值
   const scrollDifference = contentHeight - containerHeight - scrollPosition;
   // 判断是否已滚动到底部最后一个可视范围内
-  console.log("calculateBottomPosition",scrollDifference)
+  // console.log("calculateBottomPosition",scrollDifference)
   if (scrollDifference <= 1) {
     // 在此处加载更多图片数据
     loadMoreImages();

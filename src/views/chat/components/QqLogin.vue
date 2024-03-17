@@ -22,7 +22,7 @@ import type {SizeType} from 'ant-design-vue/es/config-provider';
 import {ref} from 'vue';
 import {loginByQQ} from '@/api/login';
 
-const IconFont = Icon.addFromIconFontCn({src: '//at.alicdn.com/t/c/font_1898478_hnsro7pv7cl.js'});
+const IconFont = Icon.addFromIconFontCn({src: '//at.alicdn.com/t/c/font_1898478_qk3tcjfa6nc.js'});
 const size = ref<SizeType>('large');
 const loginHandle = async () => {
   const res = await loginByQQ();

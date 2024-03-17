@@ -2,7 +2,7 @@
 import '@arco-design/web-vue/dist/arco.css';
 import {fileTypeList, type fileTypeListItem} from '@/constant/file';
 import { Icon } from '@arco-design/web-vue';
-const IconFont = Icon.addFromIconFontCn({ src: '//at.alicdn.com/t/c/font_1898478_7sjj2m5hmkp.js' });
+const IconFont = Icon.addFromIconFontCn({ src: '//at.alicdn.com/t/c/font_1898478_qk3tcjfa6nc.js' });
 const route = useRoute();
 const router = useRouter();
 

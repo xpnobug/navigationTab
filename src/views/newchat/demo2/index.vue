@@ -1,5 +1,5 @@
 <template>
-  <div class="main-new" data-theme=indigo>
+  <div style="height: 85vh; box-shadow: black" class="main-new" data-theme=indigo>
     <div class="app-container">
       <ChatLeft/>
       <ChatMain/>

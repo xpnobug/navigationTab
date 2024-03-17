@@ -10,7 +10,7 @@ export const useUserStore = defineStore('user', () => {
 
   // 使用 ref 创建响应式变量 isSign，表示用户是否已登录
   const isSign = ref(false)
-  console.log("初始化isSign",isSign)
+  // console.log("初始化isSign",isSign)
   // 本地存储中读取用户信息，若存在则初始化 userInfo
   let localUserInfo = {}
   try {
@@ -21,7 +21,7 @@ export const useUserStore = defineStore('user', () => {
 
   // 如果 userInfo 为空且本地存储中有用户信息，则初始化 userInfo
   if (!Object.keys(userInfo.value).length && Object.keys(localUserInfo).length) {
-    console.log(localUserInfo)
+    // console.log(localUserInfo)
     userInfo.value = localUserInfo
   }
 

@@ -25,7 +25,7 @@ const req: FsVirtualWaterfallReuqest = async (page, pageSize) => {
     pageSize: pageSize
   };
   const rep = await getImgList(params);
-  console.log(rep.data)
+  // console.log(rep.data)
   // 数据处理
 // 数据处理
   let rows = [];
@@ -68,7 +68,7 @@ const req: FsVirtualWaterfallReuqest = async (page, pageSize) => {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  //animation: identifier 0.25s; // 添加动画，使其出现时更加丝滑
+  animation: identifier 0.25s; // 添加动画，使其出现时更加丝滑
 }
 @keyframes identifier {
   from {

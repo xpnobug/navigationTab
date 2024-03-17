@@ -66,7 +66,7 @@ const send = (msgType: MsgEnum, body: any) => {
       .sendMsg({ roomId: globalStore.currentSession.roomId, msgType, body })
       .send()
       .then((res) => {
-        console.log("发送的信息",body)
+        // console.log("发送的信息",body)
         if (res.message.type === MsgEnum.TEXT) {
           chatStore.pushMsg(res) // 消息列表新增一条消息
           chatStore.chatListToBottomAction?.() // 滚动到消息列表底部
@@ -105,10 +105,10 @@ const sendMsgHandler = () => {
 }
 
 watch(value, () => {
-  console.log('value', value);
+  // console.log('value', value);
 });
 const onSelect = (option: { value: string }) => {
-  console.log('select', option);
+  // console.log('select', option);
 };
 
 const options = [

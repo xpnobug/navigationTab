@@ -98,7 +98,7 @@ class WS {
   }
 
   #send(msg: WsReqMsgContentType) {
-    console.log(msg)
+    // console.log(msg)
     worker.postMessage(
       `{"type":"message","value":${typeof msg === 'string' ? msg : JSON.stringify(msg)}}`,
     )
@@ -126,14 +126,14 @@ class WS {
     switch (params.type) {
       // 获取登录二维码
       case WsResponseMessageType.LoginQrCode: {
-        console.log("获取登录二维码")
+        // console.log("获取登录二维码")
         const data = params.data as LoginInitResType
         loginStore.loginQrCode = data.loginUrl
         break
       }
       // 等待授权
       case WsResponseMessageType.WaitingAuthorize: {
-        console.log("等待授权")
+        // console.log("等待授权")
         loginStore.loginStatus = LoginStatus.Waiting
         break
       }

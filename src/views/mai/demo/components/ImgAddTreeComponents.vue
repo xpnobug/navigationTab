@@ -1,10 +1,9 @@
 <template>
   <a-tree-select v-model:value="internalValue" show-search style="width: 100%"
-    :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }" placeholder="请选择文章类型" allow-clear
+    :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }" placeholder="请选择图片类型" allow-clear
     tree-default-expand-all :tree-data="treeData" :field-names="{
-      children: 'children',
-      label: 'title',
-      value: 'key',
+      label: 'label',
+      value: 'id',
     }" tree-node-filter-prop="type"></a-tree-select>
 </template>
 
@@ -18,14 +17,18 @@ const value = ref<string>(''); // 提供一个默认值
 const internalValue = ref<string>('');
 const emits = defineEmits(['update:value']);
 
-onMounted(() => {
-  getBlogFlList()
-    .then(res => {
-      //   initLoading.value = false;
-      treeData.value = res.data;
-      // console.log(treeData.value);
-    });
-});
+
+const typeItems = ref([
+  { id: 1, label: '动漫'},
+  { id: 2, label: '古风'},
+  { id: 3, label: '情侣'},
+  { id: 4, label: '男生'},
+  { id: 5, label: '女生'},
+  { id: 6, label: '明星'},
+  { id: 7, label: '搞怪'},
+  { id: 8, label: '精选'},
+]);
+treeData.value = typeItems.value;
 
 // 监听 modelValue 的变化
 watch(internalValue, () => {

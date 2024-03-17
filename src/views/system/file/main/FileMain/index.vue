@@ -75,7 +75,7 @@ const getList = async (params: ListParam = {...queryParams.value}) => {
     params.type = params.type === '0' ? undefined : params.type;
     const res = await list(params);
     fileList.value = res.data.data.records;
-    console.log(res.data.data.records)
+    // console.log(res.data.data.records)
   } finally {
     loading.value = false;
   }
@@ -183,10 +183,10 @@ const handleUpload = (options: RequestOption) => {
       name = 'file',
     } = options;
     onProgress(20);
-    console.log('fileItem:', fileItem);
+    // console.log('fileItem:', fileItem);
     const formData = new FormData();
     formData.append(name as string, fileItem.file as Blob);
-    console.log(formData)
+    // console.log(formData)
     upload(fileItem)
         .then((res) => {
           onSuccess(res);
@@ -230,7 +230,7 @@ const getStorageList = async (
   try {
     storageLoading.value = true;
     const res = await listStorage(null);
-    console.log("list",res.data.data)
+    // console.log("list",res.data.data)
     storageList.value = res.data.data.records;
     totalStorage.value = res.data.data.total;
   } finally {

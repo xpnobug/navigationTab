@@ -43,7 +43,7 @@ import {useDraggable} from '@vueuse/core';
 import {LoginStatus, useWsLoginStore} from '@/stores/ws'
 import {Icon} from '@arco-design/web-vue';
 import {SizeType} from "ant-design-vue/es/config-provider";
-const IconFont = Icon.addFromIconFontCn({src: '//at.alicdn.com/t/c/font_1898478_hnsro7pv7cl.js'});
+const IconFont = Icon.addFromIconFontCn({src: '//at.alicdn.com/t/c/font_1898478_qk3tcjfa6nc.js'});
 const loginStore = useWsLoginStore()
 const open = ref<boolean>(false);
 const modalTitleRef = ref<HTMLElement>(null);

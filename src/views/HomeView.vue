@@ -80,7 +80,7 @@ const handleMenuItemClick = (item) => {
   console.log(routeName, item.params)
 };
 const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_1898478_az5nroxqmv4.js',
+  scriptUrl: '//at.alicdn.com/t/c/font_1898478_qk3tcjfa6nc.js',
 });
 </script>
 

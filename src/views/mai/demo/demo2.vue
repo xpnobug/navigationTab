@@ -1,8 +1,16 @@
 <template>
 <div class="main">
+  <ImgAddComponents/>
+  <div style="position: fixed;">
+    <a-space warp>
+      <a-button type="text" danger v-for="i in typeItems" @click="handleClick(i)">{{ i.label }}
+        <span v-if="i.label === typeName">({{total}})</span>
+      </a-button>
+    </a-space>
+  </div>
   <div class="Gallery" id="scrollableElement" ref="virtualListRef" @scroll="onScrolls">
     <div class="imglist">
-      <img v-for="(img, index) in listInfo" :src="img.avatar" :key="index" ref="imgRef" :data-src="img.avatar" alt=""/>
+      <ShowCompents :listInfo="listInfo"/>
     </div>
     <div style="text-align: center; margin: 20px; color: white" v-if="loading">Loading...</div>
   </div>
@@ -14,22 +22,48 @@ import { ref, onMounted, nextTick } from 'vue';
 import { getImgList } from "@/api/mai";
 import { useInView } from "@/hooks/useInView";
 import throttle from "lodash/throttle";
-// import { debounce, throttle } from "@/hooks/useJlfd";
+import ShowCompents from "@/views/mai/demo/ShowCompents.vue";
+import ImgAddComponents from "@/views/mai/demo/components/ImgAddComponents.vue";
+
+const typeItems = ref([
+  { id: 1, label: '动漫'},
+  { id: 2, label: '古风'},
+  { id: 3, label: '情侣'},
+  { id: 4, label: '男生'},
+  { id: 5, label: '女生'},
+  { id: 6, label: '明星'},
+  { id: 7, label: '搞怪'},
+  { id: 8, label: '精选'},
+]);
 
 const imgRef = ref([]);
 const listInfo = ref([]);
 const total = ref(0);
 const virtualListRef = ref(null);
 provide('virtualListRef', virtualListRef);
-
+const typeName = ref('动漫');
+const handleClick = async (i) => {
+  typeName.value = i.label;
+  const params = {
+    cateName: i.label,
+    pageNum: 1,
+    pageSize: 20
+  };
+  const res = await getImgList(params);
+  total.value = res.data.total
+  listInfo.value = res.data.records;
+  await nextTick();
+  imgRef.value = document.querySelectorAll("img");
+}
 const list = async () => {
   const params = {
-    cateName: 11,
+    cateName: '动漫',
     pageNum: 1,
     pageSize: 20
   };
   const res = await getImgList(params);
   listInfo.value = res.data.records;
+  total.value = res.data.total
   await nextTick();
   imgRef.value = document.querySelectorAll("img");
 };
@@ -37,15 +71,16 @@ const list = async () => {
 // 是否正在加载更多图片
 const loading = ref(false);
 const num = ref(1)
+
 // 加载更多图片数据的函数
 const loadMoreImages = async () => {
   num.value += 1;
-  console.log(num.value)
+  // console.log(num.value)
   loading.value = true;
   setTimeout(async () => {
     try {
       const params = {
-        cateName: null,
+        cateName: typeName.value,
         pageNum: num.value,
         pageSize: 20
       };
@@ -67,7 +102,7 @@ const scrollContainer = ref();
 const onScrolls = throttle(() => {
   // 获取元素的滚动位置
   const scrollPosition = scrollContainer.value.scrollTop;
-  console.log(scrollPosition)
+  // console.log(scrollPosition)
   // 获取元素的滚动容器高度
   const containerHeight = scrollContainer.value.clientHeight;
   // 获取元素的滚动内容高度
@@ -80,6 +115,7 @@ const onScrolls = throttle(() => {
     loadMoreImages();
   }
 }, 800);
+
 
 
 
@@ -125,8 +161,8 @@ onMounted(async () => {
 .Gallery {
   overflow: auto;
   max-width: 1200px;
-  margin: auto;
   height: 730px;
+  margin-top: 30px;
 }
 .imglist{
   display: flex;
@@ -175,7 +211,7 @@ svg {
 
 .main {
   /*margin: 12px;*/
-  background: #111;
+  /*background: #111;*/
 }
 
 .Me {

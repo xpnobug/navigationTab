@@ -24,7 +24,7 @@ const list = async () => {
   };
   const res = await getImgList(params);
   listInfo.value = res.data.data.records;
-  console.log(listInfo.value)
+  // console.log(listInfo.value)
 }
 list();
 
@@ -37,7 +37,7 @@ const loading = ref(false);
 onMounted(() => {
   // 获取需要检查滚动位置的元素，假设这个元素的id为 "scrollableElement"
   scrollContainer.value = document.getElementById("scrollableElement");
-  console.log(scrollContainer.value)
+  // console.log(scrollContainer.value)
 })
 // 滚动时触发函数，主要处理新消息提示
 // 创建节流函数
@@ -45,7 +45,7 @@ const onScroll = throttle(() => {
   if (!scrollContainer.value) return; // 如果滚动容器不存在，则直接返回
   // 获取元素的滚动位置
   const scrollPosition = scrollContainer.value.scrollTop;
-  console.log(scrollPosition)
+  // console.log(scrollPosition)
   // 获取元素的滚动容器高度
   const containerHeight = scrollContainer.value.clientHeight;
   // 获取元素的滚动内容高度
